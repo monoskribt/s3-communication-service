@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Uploader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 4L4 10V22L16 28L28 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 16L4 10M16 16L28 10M16 16V28" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span>CloudDrop</span>
+            </div>
+            <div class="header-info">
+                <div class="info-badge">
+                    <span class="badge-label">Multipart</span>
+                    <span class="badge-value">&gt;10MB</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-zone" id="dropZone">
+            <input type="file" id="fileInput" hidden>
+            <div class="upload-content" id="uploadContent">
+                <div class="upload-icon">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+                        <path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h1>Drop your file here</h1>
+                <p>or click to browse</p>
+                <div class="file-info">
+                    <span>Supports any file type</span>
+                    <span class="separator">·</span>
+                    <span>Auto multipart for 10MB+</span>
+                </div>
+            </div>
+            
+            <div class="file-preview hidden" id="filePreview">
+                <div class="file-card">
+                    <div class="file-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect x="8" y="4" width="24" height="32" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M14 14H26M14 20H26M14 26H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="file-details">
+                        <div class="file-name" id="fileName">filename.txt</div>
+                        <div class="file-size" id="fileSize">0 MB</div>
+                    </div>
+                    <button class="btn-remove" id="removeFile">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-section hidden" id="progressSection">
+            <div class="progress-header">
+                <span class="progress-label" id="statusLabel">Preparing upload...</span>
+                <span class="progress-percent" id="progressPercent">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-stats">
+                <span id="uploadedSize">0 MB</span>
+                <span class="separator">/</span>
+                <span id="totalSize">0 MB</span>
+            </div>
+        </div>
+
+        <button class="btn-upload hidden" id="uploadButton">
+            <span>Upload to S3</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 4V16M10 4L6 8M10 4L14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+        <div class="success-message hidden" id="successMessage">
+            <div class="success-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2"/>
+                    <path d="M14 24L20 30L34 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2>Upload Complete!</h2>
+            <p>Your file has been successfully uploaded to S3</p>
+            <button class="btn-secondary" id="uploadAnother">Upload Another File</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
